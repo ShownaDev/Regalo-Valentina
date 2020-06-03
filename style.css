@@ -1,0 +1,62 @@
+/*Fuentes
+font-family: 'Josefin Sans', sans-serif;
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #6300CB;
+}
+
+.heart-container{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heart-shape{
+    position: relative;
+    width: 100px;
+    height: 100px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: rgb(253, 2, 2);
+}
+.heart-shape:before,
+.heart-shape:after{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    content: '';
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    background-color: rgb(253, 2, 2);
+}
+.heart-shape:before{
+    bottom: 0px;
+    left: -50px;
+}
+.heart-shape:after{
+    top: -50px;
+    right: 0px;
+}
+
+
+.title_click{
+    font-family: 'Josefin Sans', sans-serif;
+    color: #fff;
+    margin: 50px 0px;
+    font-size: 28px;
+    text-shadow: 1px 1px 4px rgb(90, 90, 90);
+}
