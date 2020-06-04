@@ -3,19 +3,6 @@ const panel = document.getElementById('panel_info');
 const heart = document.getElementById('heart_contain');
 const verso_p = document.getElementById('texto_verso');
 
-boton_desplegar.addEventListener('click', function(e){
-    heart.style.display = 'none';
-    e.target.style.display = 'none';
-
-    panel.style.display = 'flex';
-    panel.style.animationName = 'desplegarPanel';
-    panel.style.animationDuration = '500ms';
-
-    setInterval(function(){
-        llenarPanel();
-    }, 2000);
-});
-
 //Array fotos
 var array_fotos = [
     'img/IMG-20190225-WA0099.jpg',
@@ -68,22 +55,47 @@ var array_temporal_versos = [];
 
 function llenarPanel(){
     verso_p.innerHTML = '';
+    var currentLength = 0;
 
-    var randomIndex = Math.floor((Math.random() * 9) + 1);
+    currentLength = array_fotos.length;
+
+    console.log(currentLength);
+
+    var randomIndex = Math.floor((Math.random() * currentLength) + 1);
+    console.log("Random: " + randomIndex);
 
     const fotoContainer = document.getElementById('foto');
 
     fotoContainer.src = array_fotos[randomIndex - 1];
 
     array_temporal_fotos.push(array_fotos[randomIndex - 1]);
-
+    removeItemFromArr(array_fotos, array_fotos[randomIndex - 1]);
+    
     //llenar versos
 
-    var randomIndexVersos = Math.floor((Math.random() * 9) + 1);
+    var randomIndexVersos = Math.floor((Math.random() * currentLength) + 1);
 
     var estrofa = array_frases[randomIndexVersos - 1];
 
     verso_p.innerHTML = estrofa;
+
+    array_temporal_versos.push(array_frases[randomIndexVersos - 1]);
+    removeItemFromArr(array_frases, array_frases[randomIndexVersos - 1]);
+
+    if(array_temporal_versos.length == 9 && array_temporal_fotos.length == 9){
+        for(var i = 0; i < array_temporal_fotos.length; i++){
+            array_fotos.push(array_temporal_fotos[i]);
+        }
+
+        for(var i = 0; i < array_temporal_versos.length; i++){
+            array_frases.push(array_temporal_versos[i]);
+        }
+
+        array_temporal_versos.length = 0;
+        array_temporal_fotos.length = 0;
+    }
+
+    console.log(array_fotos);
 }
 
 //Eliminar elemento de un array
@@ -91,3 +103,18 @@ function removeItemFromArr ( arr, item ) {
     var i = arr.indexOf( item );
     arr.splice( i, 1 );
 }
+
+boton_desplegar.addEventListener('click', function(e){
+    llenarPanel();
+    
+    heart.style.display = 'none';
+    e.target.style.display = 'none';
+
+    panel.style.display = 'flex';
+    panel.style.animationName = 'desplegarPanel';
+    panel.style.animationDuration = '500ms';
+
+    setInterval(function(){
+        llenarPanel();
+    }, 6000);
+});
