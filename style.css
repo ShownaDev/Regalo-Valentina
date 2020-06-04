@@ -101,6 +101,13 @@ a{
     /*
     animation-name: desplegarPanel;
     animation-duration: 500ms;*/
+    flex-direction: column;
+    align-items: center;
+}
+
+.foto{
+    width: 60%;
+    height: 60%;
 }
 
 @keyframes desplegarPanel{
